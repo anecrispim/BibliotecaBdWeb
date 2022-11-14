@@ -75,8 +75,22 @@ body {
 	padding: 15px 5px;
 	margin: 10px 5px;
 }
-#msform .action-button:hover, #msform .action-button:focus, #msform .plus-button:hover, #msform .plus-button:focus {
+#msform .remove-button {
+	width: 10%;
+	background: #fd6161;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 15px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus, #msform .plus-button:hover, #msform .plus-button:focus{
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+#msform .remove-button:hover, #msform .remove-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #fd6161;
 }
 /*headings*/
 .fs-title {

@@ -78,4 +78,12 @@ $(".previous").click(function(){
 
 $(".submit").click(function(){
 	return false;
-})
+});
+
+$(".plus-button").on("click", function(){
+	$("#div-tables").append('<input type="text" class="tables" placeholder="Nome da Tabela" /><button type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
+});
+$(document).on("click", ".remove-button", function() {
+	$(this).prev().remove();
+	$(this).remove();
+});
