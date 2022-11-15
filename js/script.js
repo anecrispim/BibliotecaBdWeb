@@ -76,14 +76,60 @@ $(".previous").click(function(){
 	});
 });
 
-$(".submit").click(function(){
-	return false;
-});
+$(function() {
+	$(".submit").click(function(){
+		return false;
+	});
 
-$(".plus-button").on("click", function(){
-	$("#div-tables").append('<input type="text" class="tables" placeholder="Nome da Tabela" /><button type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
-});
-$(document).on("click", ".remove-button", function() {
-	$(this).prev().remove();
-	$(this).remove();
+	$(".plus-button").on("click", function(){
+		$("#div-tables").append('<input type="text" class="tables" placeholder="Nome da Tabela" /><button type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
+	});
+	$(document).on("click", ".remove-button", function() {
+		$(this).prev().remove();
+		$(this).remove();
+	});
+
+	$('#user').on('change', function(){
+		if ($(this).val() != '' && $('#port').val() != '' && $('#url').val() != '') {
+			$('#next1').removeAttr('disabled');
+			$('#next1').removeAttr('style');
+		} else if ($('#next1').attr('disabled') != 'disabled') {
+			$('#next1').attr('disabled', 'true');
+			$('#next1').attr('style', 'background: #98e1b7;');
+		}
+	});
+
+	$('#port').on('change', function(){
+		if ($(this).val() != '' && $('#user').val() != '' && $('#url').val() != '') {
+			$('#next1').removeAttr('disabled');
+			$('#next1').removeAttr('style');
+		} else if ($('#next1').attr('disabled') != 'disabled') {
+			$('#next1').attr('disabled', 'true');
+			$('#next1').attr('style', 'background: #98e1b7;');
+		}
+	});
+
+	$('#url').on('change', function(){
+		if ($(this).val() != '' && $('#port').val() != '' && $('#user').val() != '') {
+			$('#next1').removeAttr('disabled');
+			$('#next1').removeAttr('style');
+		} else if ($('#next1').attr('disabled') != 'disabled') {
+			$('#next1').attr('disabled', 'true');
+			$('#next1').attr('style', 'background: #98e1b7;');
+		}
+	});
+
+	$(document).on('change', '.tables', function(){
+		$('.tables').each(function(){
+			if ($(this).val() == '') {
+				if ($('#next2').attr('disabled') != 'disabled') {
+					$('#next2').attr('disabled', 'true');
+					$('#next2').attr('style', 'background: #98e1b7;');
+				}
+			} else {
+				$('#next2').removeAttr('disabled');
+				$('#next2').removeAttr('style');
+			} 
+		});
+	});
 });

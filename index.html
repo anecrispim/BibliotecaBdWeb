@@ -23,11 +23,11 @@
   <fieldset>
     <h2 class="fs-title">Conexão do Banco de Dados</h2>
     <h3 class="fs-subtitle">Passo 1</h3>
-    <input type="text" name="url" placeholder="Url" />
-    <input type="number" name="port" placeholder="Porta" />
-    <input type="text" name="User" placeholder="Usuário" />
-    <input type="password" name="password" placeholder="Senha" />
-    <input type="button" name="next" class="next action-button" value="Próximo" />
+    <input type="text" name="url" placeholder="Url" id="url"/>
+    <input type="number" name="port" placeholder="Porta" id="port"/>
+    <input type="text" name="User" placeholder="Usuário" id="user" />
+    <input type="password" name="password" placeholder="Senha" id="senha"/>
+    <input type="button" name="next" class="next action-button" value="Próximo" id="next1" disabled style="background: #98e1b7;">
   </fieldset>
   <fieldset>
     <h2 class="fs-title">Tabelas do Banco de Dados</h2>
@@ -37,7 +37,7 @@
       <button type="button" class="plus-button"><i class="fa-solid fa-circle-plus" style="font-size: 14px;"></i></button>
     </div>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" name="next" class="next action-button" value="Próximo" />
+    <input type="button" name="next" class="next action-button" value="Próximo" id="next2" disabled style="background: #98e1b7;">
   </fieldset>
   <fieldset>
     <h2 class="fs-title">Colunas</h2>
