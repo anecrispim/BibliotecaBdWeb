@@ -81,12 +81,20 @@ $(function() {
 		return false;
 	});
 
-	$(".plus-button").on("click", function(){
-		$("#div-tables").append('<input type="text" class="tables" placeholder="Nome da Tabela" /><button type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
+	$(document).on("click", ".plus-button", function(){
+		if ($(this).data('tipo') == 'table') {
+			$("#div-tables").append('<input type="text" class="tables" placeholder="Nome da Tabela" /><button data-tipo="tables" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
+			jBloqueiaCampo('tables');
+		} else {
+			$(this).parent('div').append('<div class="div-elem"><input type="text" class="columns" placeholder="Nome da Coluna" /><button data-tipo="columns" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button></div>');
+			jBloqueiaCampo('columns');
+		}
 	});
+
 	$(document).on("click", ".remove-button", function() {
 		$(this).prev().remove();
 		$(this).remove();
+		jBloqueiaCampo($(this).data('tipo'));
 	});
 
 	$('#user').on('change', function(){
@@ -120,16 +128,38 @@ $(function() {
 	});
 
 	$(document).on('change', '.tables', function(){
-		$('.tables').each(function(){
-			if ($(this).val() == '') {
-				if ($('#next2').attr('disabled') != 'disabled') {
-					$('#next2').attr('disabled', 'true');
-					$('#next2').attr('style', 'background: #98e1b7;');
-				}
-			} else {
-				$('#next2').removeAttr('disabled');
-				$('#next2').removeAttr('style');
-			} 
+		jBloqueiaCampo('tables');
+	});
+
+	$(document).on('change', '.columns', function(){
+		jBloqueiaCampo('columns');
+	});
+
+	$('#next2').on('click', function(){
+		$('#div-columns').html('');
+		$('input.tables').each(function(){
+			var sElem = "<h4 style='font-weight: bold;''>"+$(this).val()+"</h4>";
+			$('#div-columns').append(sElem);
+			$('#div-columns').append('<div class="div-elem"><input type="text" class="columns" placeholder="Nome da Coluna" /><button type="button" data-tipo="column" class="plus-button"><i class="fa-solid fa-circle-plus" style="font-size: 14px;"></i></button></div>');
 		});
 	});
 });
+
+function jBloqueiaCampo(sTipo) {
+	var sElem = 'input.'+sTipo;
+	var sButton = sTipo == 'tables' ? '#next2' : '#gerar-json';
+	var bHabilita = true;
+	$(sElem).each(function(){
+		if ($(this).val() == '') {
+			bHabilita = false;
+		}
+	});
+
+	if (bHabilita) {
+		$(sButton).removeAttr('disabled');
+		$(sButton).removeAttr('style');
+	} else {
+		$(sButton).attr('disabled', 'true');
+		$(sButton).attr('style', 'background: #98e1b7;');
+	}
+}
