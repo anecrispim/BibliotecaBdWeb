@@ -143,6 +143,20 @@ $(function() {
 			$('#div-columns').append('<div class="div-elem"><input type="text" class="columns" placeholder="Nome da Coluna" /><button type="button" data-tipo="column" class="plus-button"><i class="fa-solid fa-circle-plus" style="font-size: 14px;"></i></button></div>');
 		});
 	});
+
+	$('#gerar-json').on('click', function(){
+		$.ajax({
+			url : "cadastrar.php",
+			type : 'post',
+			data : {
+				 nome : "Maria Fernanda",
+				 salario :'3500'
+			},
+			beforeSend : function(){
+				 $("#resultado").html("ENVIANDO...");
+			}
+	   })
+	});
 });
 
 function jBloqueiaCampo(sTipo) {
