@@ -27,6 +27,10 @@
     <input type="number" name="port" placeholder="Porta" id="port"/>
     <input type="text" name="User" placeholder="Usuário" id="user" />
     <input type="password" name="password" placeholder="Senha" id="senha"/>
+    <select name="tipoBD" id="tipoBD" >
+      <option value="MySql">MySql</option>
+    </select>
+    <input type="text" name="nameBD" placeholder="Nome do Banco de Dados" id="nameBD"/>
     <input type="button" name="next" class="next action-button" value="Próximo" id="next1" disabled style="background: #98e1b7;">
   </fieldset>
   <fieldset>
@@ -46,6 +50,10 @@
     </div>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
     <input type="submit" name="submit" class="submit action-button" id="gerar-json" value="Gerar Json" disabled style="background: #98e1b7;"/>
+    <div id="load">
+      
+    </div>
+
   </fieldset>
 </form>
 <!-- partial -->

@@ -98,7 +98,7 @@ $(function() {
 	});
 
 	$('#user').on('change', function(){
-		if ($(this).val() != '' && $('#port').val() != '' && $('#url').val() != '') {
+		if ($(this).val() != '' && $('#port').val() != '' && $('#url').val() != '' && $('#nameBD').val() != '') {
 			$('#next1').removeAttr('disabled');
 			$('#next1').removeAttr('style');
 		} else if ($('#next1').attr('disabled') != 'disabled') {
@@ -108,7 +108,7 @@ $(function() {
 	});
 
 	$('#port').on('change', function(){
-		if ($(this).val() != '' && $('#user').val() != '' && $('#url').val() != '') {
+		if ($(this).val() != '' && $('#user').val() != '' && $('#url').val() != '' && $('#nameBD').val() != '') {
 			$('#next1').removeAttr('disabled');
 			$('#next1').removeAttr('style');
 		} else if ($('#next1').attr('disabled') != 'disabled') {
@@ -118,7 +118,17 @@ $(function() {
 	});
 
 	$('#url').on('change', function(){
-		if ($(this).val() != '' && $('#port').val() != '' && $('#user').val() != '') {
+		if ($(this).val() != '' && $('#port').val() != '' && $('#user').val() != '' && $('#nameBD').val() != '') {
+			$('#next1').removeAttr('disabled');
+			$('#next1').removeAttr('style');
+		} else if ($('#next1').attr('disabled') != 'disabled') {
+			$('#next1').attr('disabled', 'true');
+			$('#next1').attr('style', 'background: #98e1b7;');
+		}
+	});
+
+	$('#nameBD').on('change', function(){
+		if ($(this).val() != '' && $('#port').val() != '' && $('#user').val() != '' && $('#url') != '') {
 			$('#next1').removeAttr('disabled');
 			$('#next1').removeAttr('style');
 		} else if ($('#next1').attr('disabled') != 'disabled') {
@@ -145,15 +155,36 @@ $(function() {
 	});
 
 	$('#gerar-json').on('click', function(){
+		var aTables = [];
+		var aColumns = [];
+
+		$('.tables').each(function(){
+			aTables.push($(this).val());
+		});
+
+		$('.columns').each(function(){
+			aColumns.push($(this).val());
+		});
+
+		var oData = {
+			  url: $('#url').val()
+			, port: $('#port').val()
+			, user: $('#user').val()
+			, password: $('#senha').val()
+			, tipoBD: $('#tipoBD').val()
+			, nameBD: $('#nameBD').val()
+			, tables: aTables
+			, columns: aColumns
+		};
 		$.ajax({
-			url : "cadastrar.php",
+			url : "gerarJson.php",
 			type : 'post',
-			data : {
-				 nome : "Maria Fernanda",
-				 salario :'3500'
-			},
+			data : oData,
 			beforeSend : function(){
-				 $("#resultado").html("ENVIANDO...");
+				 $("#load").html('<img src="img/load.gif" style="width: 200px;margin-right: 45px;">');
+			},
+			success: function(){
+				$("#load").html('');
 			}
 	   })
 	});
