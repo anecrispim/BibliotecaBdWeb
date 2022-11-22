@@ -155,6 +155,10 @@ body {
 	color: white;
 }
 
-.tables, .columns {
+.tables {
 	width: 85% !important;
+}
+
+.columns, .types {
+	width: 42% !important;
 }

@@ -86,12 +86,31 @@ $(function() {
 			$("#div-tables").append('<input type="text" class="tables" placeholder="Nome da Tabela" /><button data-tipo="tables" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
 			jBloqueiaCampo('tables');
 		} else {
-			$(this).parent('div').append('<div class="div-elem"><input type="text" class="columns" placeholder="Nome da Coluna" /><button data-tipo="columns" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button></div>');
+			$(this).parent('div').append('<input type="text" class="columns" placeholder="Nome da Coluna" / data-table="'+$(this).data('table')+'">');
+			$(this).parent('div').append('<select id="type" class="types" style="margin-left:5px;"></select>');
+			$(this).parent('div').find('select').append('<option value="INT">INT</option>');
+			$(this).parent('div').find('select').append('<option value="VARCHAR">VARCHAR</option>');
+			$(this).parent('div').find('select').append('<option value="DECIMAL">DECIMAL</option>');
+			$(this).parent('div').find('select').append('<option value="DATETIME">DATETIME</option>');
+			$(this).parent('div').find('select').append('<option value="TIME">TIME</option>');
+			$(this).parent('div').find('select').append('<option value="TIMESTAMP">TIMESTAMP</option>');
+			$(this).parent('div').find('select').append('<option value="YEAR">YEAR</option>');
+			$(this).parent('div').find('select').append('<option value="DOUBLE">DOUBLE</option>');
+			$(this).parent('div').find('select').append('<option value="FLOAT">FLOAT</option>');
+			$(this).parent('div').find('select').append('<option value="CHAR">CHAR</option>');
+			$(this).parent('div').find('select').append('<option value="JSON">JSON</option>');
+			$(this).parent('div').find('select').append('<option value="LONGTEXT">LONGTEXT</option>');
+			$(this).parent('div').find('select').append('<option value="BOOLEAN">BOOLEAN</option>');
+			$(this).parent('div').find('select').append('<option value="ENUM">ENUM</option>');
+			$(this).parent('div').append('<button data-tipo="columns" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
 			jBloqueiaCampo('columns');
 		}
 	});
 
 	$(document).on("click", ".remove-button", function() {
+		if ($(this).data('tipo') == 'columns') {
+			$(this).prev().remove();
+		}
 		$(this).prev().remove();
 		$(this).remove();
 		jBloqueiaCampo($(this).data('tipo'));
@@ -142,28 +161,53 @@ $(function() {
 	});
 
 	$(document).on('change', '.columns', function(){
+		$(this).next().attr('data-column', $(this).val());
 		jBloqueiaCampo('columns');
 	});
 
 	$('#next2').on('click', function(){
 		$('#div-columns').html('');
 		$('input.tables').each(function(){
-			var sElem = "<h4 style='font-weight: bold;''>"+$(this).val()+"</h4>";
-			$('#div-columns').append(sElem);
-			$('#div-columns').append('<div class="div-elem"><input type="text" class="columns" placeholder="Nome da Coluna" /><button type="button" data-tipo="column" class="plus-button"><i class="fa-solid fa-circle-plus" style="font-size: 14px;"></i></button></div>');
+			var sElem = "<h4 style='font-weight: bold;'>"+$(this).val()+"</h4>";
+			$('#div-columns').append(sElem);	
+			$('#div-columns').append('<input type="text" class="columns" placeholder="Nome da Coluna" / data-table="'+$(this).val()+'">');
+			$('#div-columns').append('<select id="type" class="types" style="margin-left:5px;"></select>');
+			$('#div-columns').find('select').append('<option value="INT">INT</option>');
+			$('#div-columns').find('select').append('<option value="VARCHAR">VARCHAR</option>');
+			$('#div-columns').find('select').append('<option value="DECIMAL">DECIMAL</option>');
+			$('#div-columns').find('select').append('<option value="DATETIME">DATETIME</option>');
+			$('#div-columns').find('select').append('<option value="TIME">TIME</option>');
+			$('#div-columns').find('select').append('<option value="TIMESTAMP">TIMESTAMP</option>');
+			$('#div-columns').find('select').append('<option value="YEAR">YEAR</option>');
+			$('#div-columns').find('select').append('<option value="DOUBLE">DOUBLE</option>');
+			$('#div-columns').find('select').append('<option value="FLOAT">FLOAT</option>');
+			$('#div-columns').find('select').append('<option value="CHAR">CHAR</option>');
+			$('#div-columns').find('select').append('<option value="JSON">JSON</option>');
+			$('#div-columns').find('select').append('<option value="LONGTEXT">LONGTEXT</option>');
+			$('#div-columns').find('select').append('<option value="BOOLEAN">BOOLEAN</option>');
+			$('#div-columns').find('select').append('<option value="ENUM">ENUM</option>');
+			$('#div-columns').append('<button type="button" data-tipo="column" class="plus-button" data-table="'+$(this).val()+'"><i class="fa-solid fa-circle-plus" style="font-size: 14px;"></i></button>');
 		});
 	});
 
 	$('#gerar-json').on('click', function(){
 		var aTables = [];
-		var aColumns = [];
+		var oColumnsFinal = {};
+		var oTypes = {};
 
-		$('.tables').each(function(){
+		$('.tables').each(function(iIdx, oElem){
 			aTables.push($(this).val());
+			var aColumns = [];
+			$('.columns').each(function(){
+				if ($(this).data('table') == $(oElem).val()) {
+					aColumns.push($(this).val());
+				}
+			});
+			oColumnsFinal[$(oElem).val()] = aColumns;
 		});
 
-		$('.columns').each(function(){
-			aColumns.push($(this).val());
+		$('.types').each(function(){
+			oTypes[$(this).data('column')] = $(this).val();
 		});
 
 		var oData = {
@@ -174,7 +218,8 @@ $(function() {
 			, tipoBD: $('#tipoBD').val()
 			, nameBD: $('#nameBD').val()
 			, tables: aTables
-			, columns: aColumns
+			, columns: oColumnsFinal
+			, types: oTypes
 		};
 		$.ajax({
 			url : "gerarJson.php",
@@ -185,6 +230,11 @@ $(function() {
 			},
 			success: function(){
 				$("#load").html('');
+				if (confirm('Gerar arquivo JSON para download?')) {
+					window.location.href = 'baixar.php';
+				} else {
+					window.open('mostrar.php');
+				}
 			}
 	   })
 	});

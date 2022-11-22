@@ -1,0 +1,23 @@
+{
+    "connection": {
+        "url": "fksk",
+        "port": "83892",
+        "user": "kska",
+        "password": "ska"
+    },
+    "bd": {
+        "sgbd": "MySql",
+        "dataBaseName": "kkas",
+        "tables": [
+            {
+                "name": "ksaks",
+                "columns": [
+                    {
+                        "name": "teste",
+                        "type": "INT"
+                    }
+                ]
+            }
+        ]
+    }
+}
