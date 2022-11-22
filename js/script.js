@@ -86,23 +86,24 @@ $(function() {
 			$("#div-tables").append('<input type="text" class="tables" placeholder="Nome da Tabela" /><button data-tipo="tables" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
 			jBloqueiaCampo('tables');
 		} else {
-			$(this).parent('div').append('<input type="text" class="columns" placeholder="Nome da Coluna" / data-table="'+$(this).data('table')+'">');
-			$(this).parent('div').append('<select id="type" class="types" style="margin-left:5px;"></select>');
-			$(this).parent('div').find('select').append('<option value="INT">INT</option>');
-			$(this).parent('div').find('select').append('<option value="VARCHAR">VARCHAR</option>');
-			$(this).parent('div').find('select').append('<option value="DECIMAL">DECIMAL</option>');
-			$(this).parent('div').find('select').append('<option value="DATETIME">DATETIME</option>');
-			$(this).parent('div').find('select').append('<option value="TIME">TIME</option>');
-			$(this).parent('div').find('select').append('<option value="TIMESTAMP">TIMESTAMP</option>');
-			$(this).parent('div').find('select').append('<option value="YEAR">YEAR</option>');
-			$(this).parent('div').find('select').append('<option value="DOUBLE">DOUBLE</option>');
-			$(this).parent('div').find('select').append('<option value="FLOAT">FLOAT</option>');
-			$(this).parent('div').find('select').append('<option value="CHAR">CHAR</option>');
-			$(this).parent('div').find('select').append('<option value="JSON">JSON</option>');
-			$(this).parent('div').find('select').append('<option value="LONGTEXT">LONGTEXT</option>');
-			$(this).parent('div').find('select').append('<option value="BOOLEAN">BOOLEAN</option>');
-			$(this).parent('div').find('select').append('<option value="ENUM">ENUM</option>');
-			$(this).parent('div').append('<button data-tipo="columns" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
+			$(this).after('<button data-tipo="columns" type="button" class="remove-button"><i class="fa-solid fa-trash-can"></i></button>');
+			$(this).after('<select id="type" class="types" style="margin-left:5px;"></select>');
+			$(this).next().append('<option value="INT">INT</option>');
+			$(this).next().append('<option value="VARCHAR">VARCHAR</option>');
+			$(this).next().append('<option value="DECIMAL">DECIMAL</option>');
+			$(this).next().append('<option value="DATETIME">DATETIME</option>');
+			$(this).next().append('<option value="TIME">TIME</option>');
+			$(this).next().append('<option value="TIMESTAMP">TIMESTAMP</option>');
+			$(this).next().append('<option value="YEAR">YEAR</option>');
+			$(this).next().append('<option value="DOUBLE">DOUBLE</option>');
+			$(this).next().append('<option value="FLOAT">FLOAT</option>');
+			$(this).next().append('<option value="CHAR">CHAR</option>');
+			$(this).next().append('<option value="JSON">JSON</option>');
+			$(this).next().append('<option value="LONGTEXT">LONGTEXT</option>');
+			$(this).next().append('<option value="BOOLEAN">BOOLEAN</option>');
+			$(this).next().append('<option value="ENUM">ENUM</option>');
+			$(this).after('<input type="text" class="columns" placeholder="Nome da Coluna" / data-table="'+$(this).data('table')+'">');
+			
 			jBloqueiaCampo('columns');
 		}
 	});
@@ -166,26 +167,30 @@ $(function() {
 	});
 
 	$('#next2').on('click', function(){
+		var aSelect = [];
+		aSelect.push('<select id="type" class="types" style="margin-left:5px;">');
+		aSelect.push('<option value="INT">INT</option>');
+		aSelect.push('<option value="VARCHAR">VARCHAR</option>');
+		aSelect.push('<option value="DECIMAL">DECIMAL</option>');
+		aSelect.push('<option value="DATETIME">DATETIME</option>');
+		aSelect.push('<option value="TIME">TIME</option>');
+		aSelect.push('<option value="TIMESTAMP">TIMESTAMP</option>');
+		aSelect.push('<option value="YEAR">YEAR</option>');
+		aSelect.push('<option value="DOUBLE">DOUBLE</option>');
+		aSelect.push('<option value="FLOAT">FLOAT</option>');
+		aSelect.push('<option value="CHAR">CHAR</option>');
+		aSelect.push('<option value="JSON">JSON</option>');
+		aSelect.push('<option value="LONGTEXT">LONGTEXT</option>');
+		aSelect.push('<option value="BOOLEAN">BOOLEAN</option>');
+		aSelect.push('<option value="ENUM">ENUM</option>');
+		aSelect.push('</select>');
 		$('#div-columns').html('');
 		$('input.tables').each(function(){
+			
 			var sElem = "<h4 style='font-weight: bold;'>"+$(this).val()+"</h4>";
 			$('#div-columns').append(sElem);	
 			$('#div-columns').append('<input type="text" class="columns" placeholder="Nome da Coluna" / data-table="'+$(this).val()+'">');
-			$('#div-columns').append('<select id="type" class="types" style="margin-left:5px;"></select>');
-			$('#div-columns').find('select').append('<option value="INT">INT</option>');
-			$('#div-columns').find('select').append('<option value="VARCHAR">VARCHAR</option>');
-			$('#div-columns').find('select').append('<option value="DECIMAL">DECIMAL</option>');
-			$('#div-columns').find('select').append('<option value="DATETIME">DATETIME</option>');
-			$('#div-columns').find('select').append('<option value="TIME">TIME</option>');
-			$('#div-columns').find('select').append('<option value="TIMESTAMP">TIMESTAMP</option>');
-			$('#div-columns').find('select').append('<option value="YEAR">YEAR</option>');
-			$('#div-columns').find('select').append('<option value="DOUBLE">DOUBLE</option>');
-			$('#div-columns').find('select').append('<option value="FLOAT">FLOAT</option>');
-			$('#div-columns').find('select').append('<option value="CHAR">CHAR</option>');
-			$('#div-columns').find('select').append('<option value="JSON">JSON</option>');
-			$('#div-columns').find('select').append('<option value="LONGTEXT">LONGTEXT</option>');
-			$('#div-columns').find('select').append('<option value="BOOLEAN">BOOLEAN</option>');
-			$('#div-columns').find('select').append('<option value="ENUM">ENUM</option>');
+			$('#div-columns').append(aSelect.join(''));
 			$('#div-columns').append('<button type="button" data-tipo="column" class="plus-button" data-table="'+$(this).val()+'"><i class="fa-solid fa-circle-plus" style="font-size: 14px;"></i></button>');
 		});
 	});

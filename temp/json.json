@@ -1,19 +1,44 @@
 {
     "connection": {
-        "url": "fksk",
-        "port": "83892",
-        "user": "kska",
-        "password": "ska"
+        "url": "salssl",
+        "port": "23",
+        "user": "ldlsd",
+        "password": "kdslds"
     },
     "bd": {
         "sgbd": "MySql",
-        "dataBaseName": "kkas",
+        "dataBaseName": "dskl",
         "tables": [
             {
-                "name": "ksaks",
+                "name": "mfdm",
                 "columns": [
                     {
-                        "name": "teste",
+                        "name": "coluna1",
+                        "type": "INT"
+                    },
+                    {
+                        "name": "coluna2",
+                        "type": "INT"
+                    },
+                    {
+                        "name": "coluna3",
+                        "type": "INT"
+                    }
+                ]
+            },
+            {
+                "name": "lfld",
+                "columns": [
+                    {
+                        "name": "coluna4",
+                        "type": "INT"
+                    },
+                    {
+                        "name": "coluna5",
+                        "type": "INT"
+                    },
+                    {
+                        "name": "coluna6",
                         "type": "INT"
                     }
                 ]
