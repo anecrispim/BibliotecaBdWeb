@@ -1,44 +1,36 @@
 {
     "connection": {
-        "url": "salssl",
-        "port": "23",
-        "user": "ldlsd",
-        "password": "kdslds"
+        "url": "localhost",
+        "port": "38289",
+        "user": "root",
+        "password": ""
     },
     "bd": {
         "sgbd": "MySql",
-        "dataBaseName": "dskl",
+        "dataBaseName": "Mercado",
         "tables": [
             {
-                "name": "mfdm",
+                "name": "Produto",
                 "columns": [
                     {
-                        "name": "coluna1",
-                        "type": "INT"
+                        "name": "Descri\u00e7\u00e3o",
+                        "type": "VARCHAR"
                     },
                     {
-                        "name": "coluna2",
-                        "type": "INT"
-                    },
-                    {
-                        "name": "coluna3",
+                        "name": "Id",
                         "type": "INT"
                     }
                 ]
             },
             {
-                "name": "lfld",
+                "name": "Marca",
                 "columns": [
                     {
-                        "name": "coluna4",
-                        "type": "INT"
+                        "name": "Nome",
+                        "type": "VARCHAR"
                     },
                     {
-                        "name": "coluna5",
-                        "type": "INT"
-                    },
-                    {
-                        "name": "coluna6",
+                        "name": "Id",
                         "type": "INT"
                     }
                 ]
